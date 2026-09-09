@@ -112,29 +112,29 @@ def build_dashboard(df):
     y_positions = range(len(division_perf))
     division_ax.barh(
         [y - 0.18 for y in y_positions],
-        division_perf["Sales"] / 1000,
+        division_perf["Sales"],
         height=0.34,
         label="Sales",
         color="#4C78A8",
     )
     division_ax.barh(
         [y + 0.18 for y in y_positions],
-        division_perf["Gross_Profit"] / 1000,
+        division_perf["Gross_Profit"],
         height=0.34,
         label="Gross profit",
         color="#59A14F",
     )
     division_ax.set_yticks(list(y_positions))
     division_ax.set_yticklabels(division_perf["Division"])
-    division_ax.set_xlabel("Amount ($ thousands)")
+    division_ax.set_xlabel("Amount ($)")
     division_ax.set_title("Sales and Gross Profit by Division")
-    max_sales_thousands = division_perf["Sales"].max() / 1000
-    division_ax.set_xlim(0, max_sales_thousands * 1.35)
+    max_sales = division_perf["Sales"].max()
+    division_ax.set_xlim(0, max_sales * 1.35)
     division_ax.legend()
     division_ax.grid(axis="x", alpha=0.25)
     for y, margin in zip(y_positions, division_perf["Gross_Margin"]):
         division_ax.text(
-            max_sales_thousands * 1.02,
+            max_sales * 1.02,
             y,
             f"{margin:.1f}% profit margin",
             va="center",
