@@ -128,11 +128,13 @@ def build_dashboard(df):
     division_ax.set_yticklabels(division_perf["Division"])
     division_ax.set_xlabel("Amount ($ thousands)")
     division_ax.set_title("Sales and Gross Profit by Division")
+    max_sales_thousands = division_perf["Sales"].max() / 1000
+    division_ax.set_xlim(0, max_sales_thousands * 1.35)
     division_ax.legend()
     division_ax.grid(axis="x", alpha=0.25)
     for y, margin in zip(y_positions, division_perf["Gross_Margin"]):
         division_ax.text(
-            division_perf["Sales"].max() / 1000 * 1.02,
+            max_sales_thousands * 1.02,
             y,
             f"{margin:.1f}% profit margin",
             va="center",
